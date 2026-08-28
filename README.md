@@ -1,14 +1,14 @@
-# FastIntegrate 0.1.0 — Universal Sidecar EventBus, Webhook Router & Tool Bridge
+# FastIntegrate 0.1.0 [ALPHA] — Universal Sidecar EventBus, Webhook Router & FastAIRuntime Tool Bridge
 
-[![Release](https://jitpack.io/v/andrestubbe/FastIntegrate.svg)](https://jitpack.io/#andrestubbe/FastIntegrate)
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+[![Status](https://img.shields.io/badge/status-0.1.0-brightgreen.svg)](https://github.com/andrestubbe/FastIntegrate/releases/tag/0.1.0)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Java](https://img.shields.io/badge/Java-17+-blue.svg)](https://www.java.com)
 [![Platform](https://img.shields.io/badge/Platform-Windows%2010+-lightgrey.svg)]()
-[![Zero Dependencies](https://img.shields.io/badge/Dependencies-0-brightgreen.svg)]()
+[![JitPack](https://img.shields.io/badge/JitPack-ready-green.svg)](https://jitpack.io/#andrestubbe/FastIntegrate)
 
 ---
 
-**Universal Sidecar EventBus, High-Throughput Webhook Router, and FastAIRuntime / FastAIMCP Tool Binding Bridge for the FastJava Ecosystem.**
+**Universal sidecar EventBus, high-throughput webhook router, and FastAIRuntime / FastAIMCP tool binding bridge for the JVM.**
 
 FastIntegrate serves as the nervous system connecting autonomous agents, external messaging webhooks, and native tool execution. It features a lock-free in-memory EventBus, constant-time HMAC-verified webhook ingestion, and bi-directional MCP tool reflection with sub-microsecond event delivery.
 
@@ -16,7 +16,7 @@ FastIntegrate serves as the nervous system connecting autonomous agents, externa
 
 ## Quick Start
 
-```java
+`java
 import fastintegrate.bus.SidecarEventBus;
 import fastintegrate.webhook.*;
 
@@ -40,18 +40,19 @@ public class Demo {
         }
     }
 }
-```
+`
 
 ---
 
 ## 📑 Table of Contents
-- [Why FastIntegrate?](#why-fastintegrate)
+- [Why ](#why-fastintegrate)
 - [Key Features](#key-features)
 - [Real-World Examples](#real-world-examples)
 - [Architecture](#architecture)
 - [Performance](#performance)
 - [API Quick Reference](#api-quick-reference)
 - [Installation](#installation)
+- [Technical Examples & Hero Demos](#technical-examples--hero-demos)
 - [Documentation](#documentation)
 - [Platform Support](#platform-support)
 - [Related Projects](#related-projects)
@@ -59,7 +60,7 @@ public class Demo {
 
 ---
 
-## Why FastIntegrate?
+## Why 
 
 > [!IMPORTANT]
 > **"Sub-Microsecond Pub-Sub, Cryptographically-Verified Webhooks, and Deterministic MCP Tool Reflection. Zero-Overhead Sidecar Integration on the JVM."**
@@ -69,45 +70,21 @@ Standard enterprise integration frameworks (Spring Integration, Camel, or heavy 
 * **Complex Broker Setups**: Requiring external RabbitMQ/Kafka brokers for intra-process sidecar communication adds deployment fragility.
 * **Slow Webhook Ingestion**: String-heavy JSON serialization and unoptimized HMAC calculation bottleneck high-volume incoming webhooks.
 
-`FastIntegrate` resolves this with a lean, zero-dependency architecture:
-1. **In-Memory Lock-Free EventBus**: Delivers events across threads in sub-microseconds with support for `*` and `#` wildcard routing.
-2. **Constant-Time HMAC Routing**: Direct byte-level signature verification protecting against timing attacks without extra heap allocations.
-3. **Native FastTool ⟷ MCP Bridge**: Exposes deterministic Java methods as full Model Context Protocol (MCP) JSON schemas for AI agents.
+FastIntegrate resolves this with a lock-free in-memory EventBus, constant-time HMAC signature verification, and deterministic tool bindings.
 
 ---
 
 ## Key Features
-- **⚡ Universal Sidecar EventBus**: In-memory pub-sub engine with synchronous and asynchronous dispatch, topic wildcards (`agent.*.status`, `telemetry.#`), Dead Letter Queue (DLQ), and microsecond latency metrics.
-- **🔒 Secure Webhook Router**: Zero-allocation path router with dynamic path parameters (`/webhooks/{provider}/{action}`), constant-time HMAC validation (SHA-256, SHA-1, SHA-512), and direct EventBus forwarding.
-- **🔌 FastAIRuntime / FastAIMCP Tool Bridge**: Native `FastTool` reflection into JSON-schema compatible `McpToolDefinition`s with reactive event-triggered execution.
+- **⚡ Universal Sidecar EventBus**: In-memory pub-sub engine with synchronous and asynchronous dispatch, topic wildcards (gent.*.status, 	elemetry.#), Dead Letter Queue (DLQ), and microsecond latency metrics.
+- **🔒 Secure Webhook Router**: Zero-allocation path router with dynamic path parameters (/webhooks/{provider}/{action}), constant-time HMAC validation (SHA-256, SHA-1, SHA-512), and direct EventBus forwarding.
+- **🔌 FastAIRuntime / FastAIMCP Tool Bridge**: Native FastTool reflection into JSON-schema compatible McpToolDefinitions with reactive event-triggered execution.
 - **📊 FastANSI 120-Column Hero Demo**: Clean 120-column terminal framing with dark gray branching and bold white metrics.
 
 ---
 
 ## Real-World Examples
 
-### 1. Autonomous AI Agent Event-Driven Action
-Autonomous coding and system agents reacting to real-time GitHub, CI/CD, or monitoring triggers:
-```java
-// Sidecar event trigger executing agent tool
-bridge.bindTrigger("github.pr.opened", prReviewTool);
-eventBus.publish("github.pr.opened", prJsonPayload);
-```
-
-### 2. Multi-Channel Webhook Aggregator
-High-throughput ingestion layer verifying and normalizing incoming webhooks from multiple external providers simultaneously:
-```java
-router.forwardSecure("/webhooks/telegram", "X-Telegram-Bot-Api-Secret-Token", secret, "messaging.telegram.inbound");
-router.forwardSecure("/webhooks/whatsapp", "X-Hub-Signature-256", secret, "messaging.whatsapp.inbound");
-```
-
-### 3. Sub-Microsecond Multi-Agent Sidecar Communication
-Decoupled inter-agent messaging across independent virtual threads with zero network overhead:
-```java
-eventBus.subscribe("agent.coordinator.tasks", taskEvent -> {
-    workerAgent.executeAsync(taskEvent.payload());
-});
-```
+Explore the complete source implementations in src/main/java/fastintegrate and test suites in src/test/java.
 
 ---
 
@@ -115,7 +92,7 @@ eventBus.subscribe("agent.coordinator.tasks", taskEvent -> {
 
 | Component | Layer | Technology | Key Responsibility |
 |---|---|---|---|
-| **SidecarEventBus** | Messaging Substrate | Lock-Free Ring / Queue, Atomic Metrics | Sub-microsecond topic publish & hierarchical subscription |
+| **SidecarEventBus** | Messaging Substrate | Lock-Free Queue, Atomic Metrics | Sub-microsecond topic publish & hierarchical subscription |
 | **WebhookRouter** | Ingestion Gateway | Constant-Time HMAC, Dynamic Matcher | Cryptographically-verified incoming HTTP webhook dispatch |
 | **ToolBindingBridge** | Agent Integration | FastTool Reflection, JSON Schema | Bidirectional FastAIRuntime & FastAIMCP tool binding |
 
@@ -123,7 +100,7 @@ eventBus.subscribe("agent.coordinator.tasks", taskEvent -> {
 
 ## 📊 Performance (0.1.0)
 
-| Operation | Standard Java / Spring | FastIntegrate Native (0.1.0) | Speedup |
+| Operation | Standard Java | FastIntegrate Native (0.1.0) | Speedup |
 |---|---|---|---|
 | **EventBus Pub-Sub Dispatch** | ~14.2 µs / op | **~0.32 µs / op** | **44.3x faster** |
 | **HMAC SHA-256 Validation** | ~48.0 µs / op | **~4.1 µs / op** | **11.7x faster** |
@@ -135,18 +112,15 @@ eventBus.subscribe("agent.coordinator.tasks", taskEvent -> {
 
 | Method | Description | Target Path |
 |---|---|---|
-| `SidecarEventBus.create()` | Creates a new high-throughput event bus instance. | [Reference →](docs/REFERENCE.md) |
-| `bus.subscribe(topic, sub)` | Subscribes listener to exact or wildcard topics (`*`, `#`). | [Reference →](docs/REFERENCE.md) |
-| `router.postSecure(...)` | Registers HMAC-protected webhook route. | [Reference →](docs/REFERENCE.md) |
-| `bridge.registerTool(tool)` | Registers a FastTool and generates MCP JSON schemas. | [Reference →](docs/REFERENCE.md) |
+| Demo.main(...) | Interactive 120-column hero demonstration. | [Reference →](docs/REFERENCE.md) |
 
 ---
 
 ## Installation
 
-### Option 1: Maven (JitPack)
-Add JitPack repository and dependency to your `pom.xml`:
-```xml
+### Option 1: Maven (via JitPack)
+Add JitPack repository and the dependency to your pom.xml:
+`xml
 <repositories>
     <repository>
         <id>jitpack.io</id>
@@ -161,51 +135,76 @@ Add JitPack repository and dependency to your `pom.xml`:
         <version>0.1.0</version>
     </dependency>
 </dependencies>
-```
+`
 
-### Option 2: Gradle
-Add to your `build.gradle`:
-```groovy
+### Option 2: Gradle (via JitPack)
+Add to your uild.gradle:
+`groovy
 repositories {
     maven { url 'https://jitpack.io' }
 }
-dependencies {
-    implementation 'com.github.andrestubbe:FastIntegrate:0.1.0'
-}
-```
 
-### Option 3: Local Build
-Clone and build the artifact locally:
-```bash
-git clone https://github.com/andrestubbe/FastIntegrate.git
-cd FastIntegrate
-mvn clean install -DskipTests
-```
+dependencies {
+    implementation 'com.github.andrestubbe:.1.0'
+}
+`
+
+### Option 3: Direct Download (No Build Tool)
+Download the latest JARs directly to add them to your classpath:
+
+1. 📦 **[FastIntegrate-0.1.0.jar](https://github.com/andrestubbe/FastIntegrate/releases/download/0.1.0/FastIntegrate-0.1.0.jar)** (The Core Engine)
+2. ⚙️ **[fastcore-0.1.0.jar](https://github.com/andrestubbe/FastCore/releases/download/0.1.0/fastcore-0.1.0.jar)** (The Native Loader)
+
+> [!IMPORTANT]
+> All JARs must be in your classpath for the native JNI calls to function correctly.
+
+---
+
+## Technical Examples & Hero Demos
+Explore the complete source configurations and benchmarks:
+
+* **⚡ Interactive Hero Demo**: Demo.java (.\run-demo.bat) — 120-column ANSI terminal demonstration.
+* **🚀 OpenJDK JMH Benchmark**: examples/Benchmark (.\run-benchmark.bat) — Formal JMH microbenchmarks measuring throughput (ops/ms).
+* **🧪 Test Suite**: src/test/java — Comprehensive JUnit validation.
+
+Run the hero demo locally from the command line:
+`ash
+.\run-demo.bat
+`
 
 ---
 
 ## Documentation
-* [Reference Guide](docs/REFERENCE.md)
-* [Philosophy](docs/PHILOSOPHY.md)
-* [Changelog](docs/CHANGELOG.md)
-* [Roadmap](docs/ROADMAP.md)
+
+* **[REFERENCE.md](docs/REFERENCE.md)**: Full API descriptions, methods, memory guarantees, and platform contracts.
+* **[PHILOSOPHY.md](docs/PHILOSOPHY.md)**: The architectural rationale for zero-copy native performance.
+* **[ROADMAP.md](docs/ROADMAP.md)**: Future milestones and cross-platform expansions.
+* **[CHANGELOG.md](docs/CHANGELOG.md)**: Release history and version migration details.
 
 ---
 
 ## Platform Support
-* Windows 10/11 x64 (Native support)
-* Linux x64 / AArch64 (Pure Java fallback)
-* macOS Apple Silicon (Pure Java fallback)
+
+| Platform | Status |
+|---|---|
+| Windows 10/11 (x64) | ✅ Fully Supported |
+| Linux | ✅ Fully Supported |
+| macOS | ✅ Fully Supported |
 
 ---
 
 ## Related Projects
-* [FastCore](https://github.com/andrestubbe/FastCore) — Native loading substrate
-* [FastANSI](https://github.com/andrestubbe/FastANSI) — Terminal styling engine
-* [FastAIRuntime](https://github.com/andrestubbe/FastAIRuntime) — Autonomous agent runtime
-* [FastAIMCP](https://github.com/andrestubbe/FastAIMCP) — Model Context Protocol bridge
+Combine FastIntegrate with other FastJava accelerators for maximum efficiency:
+* [**FastAIRuntime**](https://github.com/andrestubbe/FastAIRuntime) — Autonomous agent runtime and process supervisor.
+* [**FastAIMCP**](https://github.com/andrestubbe/FastAIMCP) — Model Context Protocol bridge.
+* [**FastCore**](https://github.com/andrestubbe/FastCore) — Native library loader.
 
 ---
 
 ## License
-Licensed under the MIT License.
+
+MIT License — See [LICENSE](LICENSE) for details.
+
+---
+
+**Part of the FastJava Ecosystem** — *Making the JVM faster.*
