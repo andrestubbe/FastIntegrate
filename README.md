@@ -3,6 +3,7 @@
 [![Java 17+](https://img.shields.io/badge/Java-17%2B-blue.svg)](https://openjdk.org/projects/jdk/17/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 [![Release](https://img.shields.io/badge/Release-0.1.0-orange.svg)](https://github.com/andrestubbe/FastIntegrate/releases/tag/0.1.0)
+[![Platform](https://img.shields.io/badge/Platform-Windows%2010+-lightgrey.svg)]()
 [![Zero Dependencies](https://img.shields.io/badge/Dependencies-0-brightgreen.svg)]()
 
 > **Universal Sidecar EventBus, High-Throughput Webhook Router, and FastAIRuntime / FastAIMCP Tool Binding Bridge for the FastJava Ecosystem.**
@@ -173,3 +174,20 @@ run-benchmark.bat
 ## 📄 License
 
 MIT License © 2026 André Stubbe. See [LICENSE](LICENSE) for details.
+
+
+---
+
+## Related Projects
+
+Part of the **FastJava** high-performance ecosystem:
+* [FastCore](https://github.com/andrestubbe/FastCore) — Unified JNI extraction and native library loader
+* [FastANSI](https://github.com/andrestubbe/FastANSI) — Ultra-fast 24-bit TrueColor terminal styling
+* [FastAIRuntime](https://github.com/andrestubbe/FastAIRuntime) — Autonomous agent runtime and process supervisor
+* [FastFileSystem](https://github.com/andrestubbe/FastFileSystem) — Unified mmap indexing and NTFS live sync
+
+---
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
