@@ -47,9 +47,9 @@ public class Demo {
 ## 📑 Table of Contents
 - [Why FastIntegrate?](#why-fastintegrate)
 - [Key Features](#key-features)
+- [Real-World Examples](#real-world-examples)
 - [Architecture](#architecture)
 - [Performance](#performance)
-- [Real-World Examples](#real-world-examples)
 - [API Quick Reference](#api-quick-reference)
 - [Installation](#installation)
 - [Documentation](#documentation)
@@ -84,13 +84,40 @@ Standard enterprise integration frameworks (Spring Integration, Camel, or heavy 
 
 ---
 
+## Real-World Examples
+
+### 1. Autonomous AI Agent Event-Driven Action
+Autonomous coding and system agents reacting to real-time GitHub, CI/CD, or monitoring triggers:
+```java
+// Sidecar event trigger executing agent tool
+bridge.bindTrigger("github.pr.opened", prReviewTool);
+eventBus.publish("github.pr.opened", prJsonPayload);
+```
+
+### 2. Multi-Channel Webhook Aggregator
+High-throughput ingestion layer verifying and normalizing incoming webhooks from multiple external providers simultaneously:
+```java
+router.forwardSecure("/webhooks/telegram", "X-Telegram-Bot-Api-Secret-Token", secret, "messaging.telegram.inbound");
+router.forwardSecure("/webhooks/whatsapp", "X-Hub-Signature-256", secret, "messaging.whatsapp.inbound");
+```
+
+### 3. Sub-Microsecond Multi-Agent Sidecar Communication
+Decoupled inter-agent messaging across independent virtual threads with zero network overhead:
+```java
+eventBus.subscribe("agent.coordinator.tasks", taskEvent -> {
+    workerAgent.executeAsync(taskEvent.payload());
+});
+```
+
+---
+
 ## Architecture
 
-| Component | Technology | Key Responsibility |
-|---|---|---|
-| **SidecarEventBus** | Lock-Free Queue, Atomic Metrics | Sub-microsecond topic publish & hierarchical subscription |
-| **WebhookRouter** | Constant-Time HMAC, Dynamic Matcher | Cryptographically-verified incoming HTTP webhook dispatch |
-| **ToolBindingBridge** | FastTool Reflection, JSON Schema | Bidirectional FastAIRuntime & FastAIMCP tool binding |
+| Component | Layer | Technology | Key Responsibility |
+|---|---|---|---|
+| **SidecarEventBus** | Messaging Substrate | Lock-Free Ring / Queue, Atomic Metrics | Sub-microsecond topic publish & hierarchical subscription |
+| **WebhookRouter** | Ingestion Gateway | Constant-Time HMAC, Dynamic Matcher | Cryptographically-verified incoming HTTP webhook dispatch |
+| **ToolBindingBridge** | Agent Integration | FastTool Reflection, JSON Schema | Bidirectional FastAIRuntime & FastAIMCP tool binding |
 
 ---
 
@@ -101,23 +128,6 @@ Standard enterprise integration frameworks (Spring Integration, Camel, or heavy 
 | **EventBus Pub-Sub Dispatch** | ~14.2 µs / op | **~0.32 µs / op** | **44.3x faster** |
 | **HMAC SHA-256 Validation** | ~48.0 µs / op | **~4.1 µs / op** | **11.7x faster** |
 | **Tool Reflection & Invocation** | ~35.0 µs / op | **~1.2 µs / op** | **29.1x faster** |
-
----
-
-## Real-World Examples
-
-### 1. Autonomous AI Agent Event-Driven Action
-```java
-// Sidecar event trigger executing agent tool
-bridge.bindTrigger("github.pr.opened", prReviewTool);
-eventBus.publish("github.pr.opened", prJsonPayload);
-```
-
-### 2. Multi-Channel Webhook Aggregator
-```java
-router.forwardSecure("/webhooks/telegram", "X-Telegram-Bot-Api-Secret-Token", secret, "messaging.telegram.inbound");
-router.forwardSecure("/webhooks/whatsapp", "X-Hub-Signature-256", secret, "messaging.whatsapp.inbound");
-```
 
 ---
 
@@ -134,8 +144,16 @@ router.forwardSecure("/webhooks/whatsapp", "X-Hub-Signature-256", secret, "messa
 
 ## Installation
 
-Add to Maven `pom.xml`:
+### Option 1: Maven (JitPack)
+Add JitPack repository and dependency to your `pom.xml`:
 ```xml
+<repositories>
+    <repository>
+        <id>jitpack.io</id>
+        <url>https://jitpack.io</url>
+    </repository>
+</repositories>
+
 <dependencies>
     <dependency>
         <groupId>com.github.andrestubbe</groupId>
@@ -143,6 +161,25 @@ Add to Maven `pom.xml`:
         <version>0.1.0</version>
     </dependency>
 </dependencies>
+```
+
+### Option 2: Gradle
+Add to your `build.gradle`:
+```groovy
+repositories {
+    maven { url 'https://jitpack.io' }
+}
+dependencies {
+    implementation 'com.github.andrestubbe:FastIntegrate:0.1.0'
+}
+```
+
+### Option 3: Local Build
+Clone and build the artifact locally:
+```bash
+git clone https://github.com/andrestubbe/FastIntegrate.git
+cd FastIntegrate
+mvn clean install -DskipTests
 ```
 
 ---
