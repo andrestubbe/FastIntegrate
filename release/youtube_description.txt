@@ -1,0 +1,15 @@
+⚡ FastIntegrate: Universal Sidecar EventBus, Webhook Router & MCP Tool Bridge for Java 17
+
+FastIntegrate connects multi-agent runtimes, sidecar microservices, and external webhooks with sub-microsecond latency and zero external dependencies.
+
+🔥 Key Highlights:
+• Universal Sidecar EventBus: Pub-sub engine with hierarchical wildcards (*, #) & DLQ.
+• Secure Webhook Router: Constant-time HMAC-SHA256 verification & auto EventBus forwarding.
+• FastAIRuntime / FastAIMCP Tool Binding Bridge: Convert FastTools to MCP definitions and trigger tools reactively.
+• FastANSI 120-Column Interactive Hero Demo.
+• Comprehensive OpenJDK JMH Microbenchmark suite.
+
+📦 GitHub Repository: https://github.com/andrestubbe/FastIntegrate
+⭐ Star the repo & join the FastJava ecosystem!
+
+#Java #Java17 #FastJava #Microservices #EventBus #Webhooks #AI #MCP #Performance #OpenSource
