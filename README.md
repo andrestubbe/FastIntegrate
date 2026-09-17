@@ -75,6 +75,13 @@ Standard enterprise integration frameworks (Spring Integration, Camel, or heavy 
 2. **Constant-Time HMAC Routing**: Direct byte-level signature verification protecting against timing attacks without extra heap allocations.
 3. **Native FastTool ⟷ MCP Bridge**: Exposes deterministic Java methods as full Model Context Protocol (MCP) JSON schemas for AI agents.
 
+| Feature | Spring Integration | Apache Camel | FastIntegrate |
+|:---|:---|:---|:---|
+| **Dispatch Latency** | Milliseconds (reflection / filters)| Hundreds of microseconds | **Sub-microsecond (< 1 µs lock-free)**|
+| **Deployment Footprint**| Heavy Spring core JARs | Multi-MB Camel engine | **Zero-dependency lightweight JAR** |
+| **Webhook Security** | Heavy filter chain / XML config | Camel crypto component | **Direct constant-time byte HMAC SHA-256**|
+| **AI Agent MCP Bridge** | Not natively supported | Not natively supported | **Bidirectional Model Context Protocol (MCP)**|
+
 ---
 
 ## Key Features
